@@ -1,0 +1,118 @@
+# ROS Tutorials
+
+
+## Install ROS
+
+1 : Install Ubuntu 18.04 visit [ubuntu.com](https://http://releases.ubuntu.com/bionic/).
+
+2 : Setup sources.list
+
+	sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+	
+3 : Setup your keys
+	
+	sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+4 : Installation
+
+	sudo apt update
+	sudo apt install ros-melodic-desktop-full
+
+5 : Setup environment
+
+	echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+	source ~/.bashrc
+
+6 : Dependencies for building packages
+
+	sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+
+7 : Initialise rosdep
+
+	sudo apt install python-rosdep
+	sudo rosdep init
+	rosdep update
+	
+8 : See what environment variable ROS 
+
+	printenv | grep ROS
+	rosversion -d
+
+9 : Create a ROS workspace
+	
+	mkdir -p ~/catkin_ws/src
+	cd ~/catkin_ws/
+	catkin_make
+	source devel/setup.bash
+	echo $ROS_PACKAGE_PATH
+
+## TurtleBOT 3
+
+1 : Install TurtleBOT 3
+
+	cd ~/catkin_ws/src/
+	git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+	git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+	cd ~/catkin_ws && catkin_make
+	
+	
+	
+2 : Edit bashrc
+
+	nano ~/.bashrc
+
+Add these lines at the bottom of the file
+	
+	source ~/catkin_ws/devel/setup.bash
+	export TURTLEBOT3_MODEL=burger 
+
+3 : Reload .bashrc
+
+	source ~/.bashrc
+
+4 : Download TurtleBot3 simulation file
+
+	cd ~/catkin_ws/src/
+	git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+
+5 : Install files with a new terminal window
+
+	cd ~/catkin_ws && catkin_make
+
+6 : Simulate TurtleBot3 using RViz
+
+	roslaunch turtlebot3_fake turtlebot3_fake.launch
+
+Move the TurtleBot3 with keyboard, Open a new terminal window 
+
+	roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+
+7 : Simulate TurtleBot3 using Gazebo
+
+	roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+
+8 : Change the simulation environment
+
+	roslaunch turtlebot3_gazebo turtlebot3_world.launch
+
+Or
+
+	roslaunch turtlebot3_gazebo turtlebot3_house.launch
+
+## SLAM
+
+1 : Simulate SLAM with TurtleBot3
+
+	sudo apt install ros-melodic-slam-gmapping
+
+2 : Start Gazabo in a new terminal window
+
+	roslaunch turtlebot3_gazebo turtlebot3_world.launch
+
+3 : Start SLAM in a new terminal window
+
+	roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping
+
+4 : Start autonomous navigation in a new terminal window
+
+	roslaunch turtlebot3_gazebo turtlebot3_simulation.launch

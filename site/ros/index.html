@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>ROS - myrobot</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "ROS";
+    var mkdocs_page_input_path = "ros.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> myrobot</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">ROS</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#install-ros">Install ROS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#turtlebot-3">TurtleBOT 3</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slam">SLAM</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">myrobot</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>ROS</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="ros-tutorials">ROS Tutorials</h1>
+<h2 id="install-ros">Install ROS</h2>
+<p>1 : Install Ubuntu 18.04 visit <a href="https://http://releases.ubuntu.com/bionic/">ubuntu.com</a>.</p>
+<p>2 : Setup sources.list</p>
+<pre><code>sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" &gt; /etc/apt/sources.list.d/ros-latest.list'
+</code></pre>
+<p>3 : Setup your keys</p>
+<pre><code>sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+</code></pre>
+<p>4 : Installation</p>
+<pre><code>sudo apt update
+sudo apt install ros-melodic-desktop-full
+</code></pre>
+<p>5 : Setup environment</p>
+<pre><code>echo "source /opt/ros/melodic/setup.bash" &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<p>6 : Dependencies for building packages</p>
+<pre><code>sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+</code></pre>
+<p>7 : Initialise rosdep</p>
+<pre><code>sudo apt install python-rosdep
+sudo rosdep init
+rosdep update
+</code></pre>
+<p>8 : See what environment variable ROS </p>
+<pre><code>printenv | grep ROS
+rosversion -d
+</code></pre>
+<p>9 : Create a ROS workspace</p>
+<pre><code>mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+echo $ROS_PACKAGE_PATH
+</code></pre>
+<h2 id="turtlebot-3">TurtleBOT 3</h2>
+<p>1 : Install TurtleBOT 3</p>
+<pre><code>cd ~/catkin_ws/src/
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+cd ~/catkin_ws &amp;&amp; catkin_make
+</code></pre>
+<p>2 : Edit bashrc</p>
+<pre><code>nano ~/.bashrc
+</code></pre>
+<p>Add these lines at the bottom of the file</p>
+<pre><code>source ~/catkin_ws/devel/setup.bash
+export TURTLEBOT3_MODEL=burger
+</code></pre>
+<p>3 : Reload .bashrc</p>
+<pre><code>source ~/.bashrc
+</code></pre>
+<p>4 : Download TurtleBot3 simulation file</p>
+<pre><code>cd ~/catkin_ws/src/
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+</code></pre>
+<p>5 : Install files with a new terminal window</p>
+<pre><code>cd ~/catkin_ws &amp;&amp; catkin_make
+</code></pre>
+<p>6 : Simulate TurtleBot3 using RViz</p>
+<pre><code>roslaunch turtlebot3_fake turtlebot3_fake.launch
+</code></pre>
+<p>Move the TurtleBot3 with keyboard, Open a new terminal window </p>
+<pre><code>roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+</code></pre>
+<p>7 : Simulate TurtleBot3 using Gazebo</p>
+<pre><code>roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+</code></pre>
+<p>8 : Change the simulation environment</p>
+<pre><code>roslaunch turtlebot3_gazebo turtlebot3_world.launch
+</code></pre>
+<p>Or</p>
+<pre><code>roslaunch turtlebot3_gazebo turtlebot3_house.launch
+</code></pre>
+<h2 id="slam">SLAM</h2>
+<p>1 : Simulate SLAM with TurtleBot3</p>
+<pre><code>sudo apt install ros-melodic-slam-gmapping
+</code></pre>
+<p>2 : Start Gazabo in a new terminal window</p>
+<pre><code>roslaunch turtlebot3_gazebo turtlebot3_world.launch
+</code></pre>
+<p>3 : Start SLAM in a new terminal window</p>
+<pre><code>roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping
+</code></pre>
+<p>4 : Start autonomous navigation in a new terminal window</p>
+<pre><code>roslaunch turtlebot3_gazebo turtlebot3_simulation.launch
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+site_name: myrobot
+
+nav:
+    - Home: index.md
+    - ROS: ros.md
+
+theme: readthedocs
